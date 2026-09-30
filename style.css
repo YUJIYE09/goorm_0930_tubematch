@@ -1,0 +1,145 @@
+/* =========================================
+   튜브매치 데모 스타일
+   색은 모두 아래 변수(--이름)로 정해 두고 가져다 씁니다.
+   ========================================= */
+:root {
+  --bg: #f5f6f8;        /* 배경 */
+  --card: #ffffff;      /* 카드·표 배경 */
+  --gray: #eef0f4;      /* 옅은 회색 칸 */
+  --line: #dde1e8;      /* 테두리 */
+  --text: #1b2130;      /* 글자 */
+  --sub: #5f6878;       /* 흐린 글자 */
+  --blue: #2b54c7;      /* 강조색 */
+  --blue-soft: #e6ecfb;
+  --red: #c4302b;       /* 유튜브 빨강 */
+  --amber: #a56200;     /* 추정·자체 지표 표시 */
+  --amber-soft: #fff5e3;
+  --green: #1f7a4d;
+  --green-soft: #e3f4ea;
+}
+/* 다크 모드: 같은 변수에 어두운 색만 다시 넣습니다 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151c; --card: #1a1e27; --gray: #222733; --line: #2e3441;
+    --text: #e7eaf0; --sub: #a3abba; --blue: #7d9bff; --blue-soft: #232c48;
+    --red: #ff6b63; --amber: #f0b453; --amber-soft: #2c2415; --green: #5fcf95; --green-soft: #18301f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151c; --card: #1a1e27; --gray: #222733; --line: #2e3441;
+  --text: #e7eaf0; --sub: #a3abba; --blue: #7d9bff; --blue-soft: #232c48;
+  --red: #ff6b63; --amber: #f0b453; --amber-soft: #2c2415; --green: #5fcf95; --green-soft: #18301f;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+}
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+h1 { font-size: 22px; margin: 0; }
+h2 { font-size: 16px; margin: 0 0 10px; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ----- 전체 틀: 왼쪽 메뉴 + 오른쪽 화면 ----- */
+.app { display: grid; grid-template-columns: 200px 1fr; min-height: 100vh; }
+.nav {
+  background: var(--card); border-right: 1px solid var(--line);
+  padding: 20px 12px; display: flex; flex-direction: column; gap: 4px;
+}
+.logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 17px; padding: 0 8px 16px; }
+.logo-icon { width: 22px; height: 16px; border-radius: 5px; background: var(--red); }
+.menu { border: 0; background: none; text-align: left; padding: 9px 10px; border-radius: 6px; color: var(--sub); font-weight: 500; }
+.menu:hover { background: var(--gray); }
+.menu.active { background: var(--blue-soft); color: var(--blue); }
+.nav-foot { margin-top: auto; border-top: 1px solid var(--line); padding: 12px 8px 0; display: grid; gap: 2px; font-size: 12px; color: var(--sub); }
+.nav-foot b { color: var(--text); font-size: 13px; }
+.link-btn { border: 0; background: none; padding: 0; color: var(--blue); text-align: left; font-size: 12px; }
+
+main { padding: 24px 28px 48px; min-width: 0; }
+
+/* ----- 자주 쓰는 조각들 ----- */
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px; margin-bottom: 16px; }
+.desc { color: var(--sub); margin: 2px 0 0; font-size: 13px; }
+.notice { display: inline-block; font-size: 12px; color: var(--amber); background: var(--amber-soft); padding: 3px 10px; border-radius: 99px; margin-bottom: 12px; }
+.box { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+.btn { border: 1px solid var(--line); background: var(--card); padding: 7px 14px; border-radius: 6px; font-weight: 500; }
+.btn:hover { border-color: var(--sub); }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: var(--card); }
+.btn.small { padding: 3px 10px; font-size: 12.5px; }
+.tag { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 99px; background: var(--gray); color: var(--sub); white-space: nowrap; }
+.tag.est { background: var(--amber-soft); color: var(--amber); border: 1px dashed var(--amber); }
+.tag.ad { background: var(--blue-soft); color: var(--blue); }
+.tag.yt { color: var(--red); }
+.small-note { font-size: 12px; color: var(--sub); margin: 8px 0 0; }
+input.field, select.field { border: 1px solid var(--line); background: var(--card); border-radius: 6px; padding: 7px 10px; width: 100%; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; flex: none; }
+.who { display: flex; align-items: center; gap: 10px; }
+.who span { display: block; font-size: 12px; color: var(--sub); }
+
+/* ----- 표 ----- */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; font-size: 12px; color: var(--sub); padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 10px; border-bottom: 1px solid var(--line); }
+.right { text-align: right; }
+tr.clickable { cursor: pointer; }
+tr.clickable:hover td { background: var(--gray); }
+
+/* ----- 채널 탐색: 필터 ----- */
+.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.filters > * { flex: 1 1 160px; }
+
+/* ----- 섭외 보드 (칸반) ----- */
+.board { display: grid; grid-template-columns: repeat(5, minmax(170px, 1fr)); gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+.column { background: var(--gray); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 8px; min-height: 160px; }
+.column h3 { font-size: 13px; margin: 0 4px; color: var(--sub); display: flex; justify-content: space-between; }
+.kcard { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 10px; display: grid; gap: 8px; }
+.kcard .moves { display: flex; justify-content: space-between; gap: 4px; }
+.kcard .moves button { border: 1px solid var(--line); background: var(--card); border-radius: 4px; font-size: 12px; padding: 1px 8px; }
+
+/* ----- 캠페인 ----- */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
+.stat .label { font-size: 12px; color: var(--sub); }
+.stat .value { font-size: 20px; font-weight: 500; }
+.add-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; margin-top: 14px; }
+.add-form label { display: grid; gap: 4px; font-size: 12px; color: var(--sub); flex: 1 1 200px; }
+
+/* ----- 채널 상세 창 ----- */
+.overlay { position: fixed; inset: 0; background: rgba(10, 14, 22, .45); display: grid; place-items: center; padding: 16px; z-index: 10; }
+.overlay[hidden] { display: none; }
+.modal { background: var(--card); border-radius: 10px; padding: 22px; width: min(720px, 100%); max-height: 90vh; overflow-y: auto; display: grid; gap: 16px; }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.tile { background: var(--gray); border-radius: 6px; padding: 10px 12px; }
+.tile .value { font-size: 18px; font-weight: 500; }
+.derived { border: 1.5px dashed var(--amber); background: var(--amber-soft); border-radius: 8px; padding: 12px 14px; font-size: 13px; }
+.derived b { color: var(--amber); }
+.status-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.status-btns button { border: 1px solid var(--line); background: var(--card); border-radius: 6px; padding: 5px 12px; }
+.status-btns button.on { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); font-weight: 700; }
+.memo-list { display: grid; gap: 6px; margin-bottom: 8px; }
+.memo-list p { margin: 0; background: var(--gray); border-radius: 6px; padding: 6px 10px; }
+.row { display: flex; gap: 8px; }
+.row .btn { flex: none; white-space: nowrap; }
+
+.toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 8px; z-index: 20; font-size: 13px; }
+.toast[hidden] { display: none; }
+
+/* ----- 좁은 화면(휴대폰): 메뉴를 위쪽 가로줄로 ----- */
+@media (max-width: 760px) {
+  .app { grid-template-columns: 1fr; }
+  .nav { flex-direction: row; align-items: center; padding: 8px 12px; border-right: 0; border-bottom: 1px solid var(--line); overflow-x: auto; }
+  .logo { padding: 0 8px 0 0; }
+  .nav-foot { display: none; }
+  .menu { white-space: nowrap; }
+  main { padding: 20px 16px 40px; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .tiles { grid-template-columns: 1fr 1fr 1fr; }
+}

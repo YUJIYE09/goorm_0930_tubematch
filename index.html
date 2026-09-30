@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>튜브매치 데모</title>
+  <!-- 글꼴: 구글 폰트에서 한글 글꼴을 불러옵니다 -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- 왼쪽 메뉴 -->
+    <nav class="nav">
+      <div class="logo"><span class="logo-icon"></span>튜브매치</div>
+      <button class="menu" data-page="explore">채널 탐색</button>
+      <button class="menu" data-page="board">섭외 보드</button>
+      <button class="menu" data-page="campaign">캠페인</button>
+      <div class="nav-foot">
+        <b>봄날코스메틱</b>
+        <span>스타터 플랜 (연습용 데모)</span>
+        <button id="reset-btn" class="link-btn">데이터 초기화</button>
+      </div>
+    </nav>
+
+    <!-- 오른쪽 화면: app.js가 이 안의 내용을 그때그때 바꿔 끼웁니다 -->
+    <main id="page"></main>
+  </div>
+
+  <!-- 채널 상세 창 (처음에는 숨겨 둠) -->
+  <div id="modal" class="overlay" hidden>
+    <div class="modal" id="modal-body"></div>
+  </div>
+
+  <!-- 잠깐 떴다 사라지는 알림 -->
+  <div id="toast" class="toast" hidden></div>
+
+  <!-- 자바스크립트: 순서가 중요합니다 (데이터 → API → 화면) -->
+  <script src="data.js"></script>
+  <script src="api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
